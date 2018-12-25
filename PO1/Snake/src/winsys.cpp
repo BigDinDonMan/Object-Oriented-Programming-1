@@ -188,20 +188,30 @@ void CDesktop::run()
   refresh();
   
   
-  CSnake* snake = (CSnake*)(*(--children.end()));
+  CSnake* snake = dynamic_cast<CSnake*>(children.back());
   srand(time(NULL));
-  std::vector<int> tempVec;
   while(1)
   {
     int c = getEvent();
-    ++snake->moveCounter;
     if(c == 'q' || c == 'Q')
       break;
-
+    // ++snake->moveCounter;
     if (c == 'p' || c == 'P') {
       snake->handlePause();
     }
+    if (c == KEY_RESIZE || CGroup::handleEvent(c)) {
+      if (snake != children.back() || !snake->game_began || snake->paused) {
+        update_screen();
+        paint();
+        refresh();
+      }
+    }
+    /*if (c == '\t') {
+      if (!snake->game_began)
+        goto changeWindow;
+    }
 
+    if (snake == children.back()) {
     if (!snake->game_began || snake->paused ) {
         if (c==KEY_RESIZE || snake->handleEvent(c)) {
         update_screen();
@@ -237,6 +247,19 @@ void CDesktop::run()
         refresh();
       }
     }
-    tempVec.push_back(c);
+  }
+  else {
+    changeWindow:
+    if (c == KEY_RESIZE || CGroup::handleEvent(c)) {
+      update_screen();
+      paint();
+      if (snake == children.back() && snake->paused) {
+        snake->paint();
+      }
+      //snake->paint();
+      refresh();
+    } 
+  }
+  tempVec.push_back(c);*/
 }
 }

@@ -4,7 +4,7 @@
 
 CSnake::CSnake(CRect r, char _c /*=' '*/) 
 : 
-CFramedWindow(r, _c), moveCounter(0), snake_size(1), game_began(false), action(KEY_RIGHT), boost(false), 
+CFramedWindow(r, _c), moveCounter(0), snake_size(1), game_began(false), action(KEY_RIGHT),
 modCounterValue(DEFAULT_COUNTER_VALUE), help_displayed(false), paused(false), 
 intro_coords(std::make_pair(CPoint(7, 7), CPoint(7, 8))), help_coords(std::make_pair(CPoint(7, 9), CPoint(7, 10))),
 level_info_coords(CPoint(6, 4)), points_coords(CPoint(6, 5)), food_location(CPoint(geom.topleft.x + 1, geom.topleft.y + 1))
@@ -196,111 +196,42 @@ bool CSnake::handleEvent(int key) {
         refresh();
         switch (key) {
             case KEY_DOWN:
-            if (action == KEY_UP) return false; 
-            moveSnake(CPoint(0, 1));
-            action = key;
-            return true; 
+	            if (action == KEY_UP) return false; 
+	            moveSnake(CPoint(0, 1));
+	            action = key;
+	            return true; 
             case KEY_UP:
-            if (action == KEY_DOWN) return false;
-            moveSnake(CPoint(0, -1));
-            action = key;
-            return true;  
+	            if (action == KEY_DOWN) return false;
+	            moveSnake(CPoint(0, -1));
+	            action = key;
+	            return true;  
             case KEY_RIGHT:
-            if (action == KEY_LEFT) return false; 
-            moveSnake(CPoint(1, 0));
-            action = key;
-            return true; 
+	            if (action == KEY_LEFT) return false; 
+	            moveSnake(CPoint(1, 0));
+	            action = key;
+	            return true; 
             case KEY_LEFT:
-            if (action == KEY_RIGHT) return false;
-            moveSnake(CPoint(-1, 0));
-            action = key;
-            return true;
+	            if (action == KEY_RIGHT) return false;
+	            moveSnake(CPoint(-1, 0));
+	            action = key;
+	            return true;
             default:
-            if (moveCounter < modCounterValue) return false;
-            switch (action) {
-                case KEY_RIGHT:
-                moveSnake(CPoint(1, 0));
-                return true; 
-                case KEY_UP:
-                moveSnake(CPoint(0, -1));
-                return true; 
-                case KEY_DOWN:
-                moveSnake(CPoint(0, 1));
-                return true; 
-                case KEY_LEFT:
-                moveSnake(CPoint(-1, 0));
-                return true; 
+	            if (moveCounter < modCounterValue) return false;
+	            switch (action) {
+	                case KEY_RIGHT:
+		                moveSnake(CPoint(1, 0));
+		                return true; 
+	                case KEY_UP:
+		                moveSnake(CPoint(0, -1));
+		                return true; 
+	                case KEY_DOWN:
+		                moveSnake(CPoint(0, 1));
+		                return true; 
+	                case KEY_LEFT:
+		                moveSnake(CPoint(-1, 0));
+		                return true; 
             } 
         }
-        // switch (key) {
-        //     if (key == action) {
-        //         boost = true;
-        //     }
-        //     case KEY_UP:
-        //     if (action == KEY_DOWN) return false;
-        //     if (!boost && moveCounter % modCounterValue != 0) {
-        //         action = KEY_UP;
-        //         return true;
-        //     }
-        //     moveSnake(CPoint(0, -1));
-        //     action = KEY_UP;
-        //     return true;
-        //     case KEY_DOWN:
-        //     if (action == KEY_UP) return false;
-        //     if (!boost && moveCounter % modCounterValue != 0) {
-        //         action = KEY_DOWN;
-        //         return true;
-        //     }
-        //     moveSnake(CPoint (0, 1));
-        //     action = KEY_DOWN;
-        //     return true;
-        //     case KEY_RIGHT:
-        //     if (action == KEY_LEFT) return false;
-        //     if (!boost && moveCounter % modCounterValue != 0) {
-        //         action = KEY_RIGHT;
-        //         return true;
-        //     }
-        //     moveSnake(CPoint (1, 0));
-        //     action = KEY_RIGHT;
-        //     return true;
-        //     case KEY_LEFT:
-        //     if (action == KEY_RIGHT) return false;
-        //     if (!boost && moveCounter % modCounterValue != 0) {
-        //         action = KEY_LEFT;
-        //         return true;
-        //     }
-        //     moveSnake(CPoint (-1, 0));
-        //     action = KEY_LEFT;
-        //     return true;
-        //     default:
-        //     switch (action) {
-        //         case KEY_UP:
-        //         if (moveCounter % modCounterValue != 0) {
-        //             return false;
-        //         }
-        //         moveSnake(CPoint(0, -1));
-        //         return true;
-        //         case KEY_DOWN:
-        //         if (moveCounter % modCounterValue != 0) {
-        //             return false;
-        //         }
-        //         moveSnake(CPoint (0, 1));
-        //         return true;
-        //         case KEY_RIGHT:
-        //         if (moveCounter % modCounterValue != 0) {
-        //             return false;
-        //         }
-        //         moveSnake(CPoint (1, 0));
-        //         return true;
-        //         case KEY_LEFT:
-        //         if (moveCounter % modCounterValue != 0) {
-        //             return false;
-        //         }
-        //         moveSnake(CPoint (-1, 0));
-        //         return true;
-        //     }
-        //     return true;
-        // }
     }
 	return false;
 }

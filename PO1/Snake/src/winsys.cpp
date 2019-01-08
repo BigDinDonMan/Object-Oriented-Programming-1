@@ -195,7 +195,6 @@ void CDesktop::run()
     int c = getEvent();
     if(c == 'q' || c == 'Q')
       break;
-    // ++snake->moveCounter;
     if (c == 'p' || c == 'P') {
       snake->handlePause();
     }
@@ -206,60 +205,5 @@ void CDesktop::run()
         refresh();
       }
     }
-    /*if (c == '\t') {
-      if (!snake->game_began)
-        goto changeWindow;
-    }
-
-    if (snake == children.back()) {
-    if (!snake->game_began || snake->paused ) {
-        if (c==KEY_RESIZE || snake->handleEvent(c)) {
-        update_screen();
-        if (!snake->game_began || snake->paused) paint();
-        if (snake->paused) snake->paintSnake();
-        refresh();
-     }
-    } 
-    
-    if (snake->game_began && !snake->paused) {
-          
-          for (auto i = tempVec.begin(); i != tempVec.end(); ++i) {
-           if (*i == c) snake->boost = true;
-          }
-
-          if (tempVec.size() >= 3) {
-            tempVec.clear();
-            snake->boost = false;
-          }
-          if (c == KEY_RESIZE || snake->handleEvent(c)) {
-              
-              update_screen();
-              snake->paintSnake();
-              refresh();
-            
-          }
-    }
-    if (snake->game_began && snake->paused) {
-      if (c==KEY_RESIZE || snake->handleEvent(c)) {
-        update_screen();
-        paint();
-        snake->paintSnake();
-        refresh();
-      }
-    }
   }
-  else {
-    changeWindow:
-    if (c == KEY_RESIZE || CGroup::handleEvent(c)) {
-      update_screen();
-      paint();
-      if (snake == children.back() && snake->paused) {
-        snake->paint();
-      }
-      //snake->paint();
-      refresh();
-    } 
-  }
-  tempVec.push_back(c);*/
-}
 }

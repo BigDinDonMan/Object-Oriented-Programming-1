@@ -23,7 +23,6 @@ class CSnake : public CFramedWindow
 		bool game_began;
 		bool paused;
 		bool game_over;
-		bool boost;
 		unsigned int moveCounter;
 		unsigned int modCounterValue;
 		int action;

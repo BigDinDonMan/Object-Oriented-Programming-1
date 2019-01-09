@@ -187,23 +187,17 @@ void CDesktop::run()
   paint();
   refresh();
   
-  
-  CSnake* snake = dynamic_cast<CSnake*>(children.back());
   srand(time(NULL));
   while(1)
   {
     int c = getEvent();
     if(c == 'q' || c == 'Q')
       break;
-    if (c == 'p' || c == 'P') {
-      snake->handlePause();
-    }
-    if (c == KEY_RESIZE || CGroup::handleEvent(c)) {
-      if (snake != children.back() || !snake->game_began || snake->paused) {
+
+    if (c == KEY_RESIZE || handleEvent(c)) {
         update_screen();
         paint();
         refresh();
-      }
     }
   }
 }

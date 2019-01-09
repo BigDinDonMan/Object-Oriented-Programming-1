@@ -50,6 +50,9 @@ void CSnake::paint() {
 		gotoyx(help_coords.second.y, help_coords.second.x);
 		printl("collect food to gather points");
     }
+    if (game_began) {
+        paintSnake();
+    }
 }
 
 void CSnake::move(const CPoint& delta) {
@@ -122,7 +125,6 @@ void CSnake::moveSnake(const CPoint& dir) {
         }
     }
 
-    paint();
     update_screen();
     if (snake_elements_coords[0] == food_location) {
         ++snake_size;
@@ -131,7 +133,7 @@ void CSnake::moveSnake(const CPoint& dir) {
         calculateFoodPosition();
         updateMoveCounter();
     }
-    if (!game_over) paintSnake();
+    paint();
     refresh();
     moveCounter %= modCounterValue;
 }
@@ -143,8 +145,10 @@ void CSnake::paintSnake() {
         if (i != snake_elements_coords.begin()) printc('+');
         else printc('o');
     }
-    gotoyx(food_location.y, food_location.x);
-    printc('$');
+    if (game_began) {
+        gotoyx(food_location.y, food_location.x);
+        printc('$');
+    }
 }
 
 void CSnake::reset() {
@@ -174,7 +178,14 @@ void CSnake::handlePause() {
 }
 
 bool CSnake::handleEvent(int key) {
+    if (key == 'p' || key == 'P') {
+        if (game_began) {
+            handlePause();
+            return true;
+        }
+    }
 	if (!game_began || paused) {
+       paintSnake();
        if (CWindow::handleEvent(key)) return true;
 	   switch (key) {
     		case 'h': case 'H':
@@ -192,7 +203,6 @@ bool CSnake::handleEvent(int key) {
         ++moveCounter;
         update_screen();
         paint();
-        paintSnake();
         refresh();
         switch (key) {
             case KEY_DOWN:
